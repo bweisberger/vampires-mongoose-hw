@@ -1,11 +1,24 @@
 // 1. Require your node modules
+const mongoose = require('mongoose');
 
 // 2. Require your model (and possibly your extra data source);
-
+const Vampires = require('./models/vampire');
+const vampArray = require('.populateVampires.js');
 // 3. Connect your database and collection name
-
+connectionString = 'mongodb://localhost/vampires';
+mongoose.connect(connectionString, {userNewUrlParser: true});
 // 4. Open your mongoose connection
+mongoose.connection.on('connected', ()=>{
+  console.log('connected on ', connectionString);
+})
 
+mongoose.connection.on('disconnected', ()=>{
+  console.log('disconnected on ', connectionString);
+})
+
+mongoose.connection.on('error', (err)=>{
+  console.log('error: ', err);
+})
 /////////////////////////////////////////////////
 //Write your answers to add, query, update, remove, and Hungry for More below.
 
@@ -14,6 +27,15 @@
 /////////////////////////////////////////////////
 // INSERT USING MONGOOSE
 // ### Add the vampire data that we gave you
+vampArray.forEach(function(vampire, index){
+  Vampire.create(vampire, (err, vampire){
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(vampire);
+    }
+  })
+})
 
 // ### Add some new vampire data
 
