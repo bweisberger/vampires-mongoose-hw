@@ -27,16 +27,22 @@ mongoose.connection.on('error', (err)=>{
 /////////////////////////////////////////////////
 // INSERT USING MONGOOSE
 // ### Add the vampire data that we gave you
-// vampArray.forEach(function(vampire, index){
-//
-//   Vampires.create(vampire, (err, vampire)=>{
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       console.log(vampire);
-//     }
-//   })
+
+// Vampires.deleteMany({name:{$exists:true}}, (err, vampires)=>{
+//   if(err){
+//     console.log(err)
+//   } else {
+//     console.log(vampires)
+//   }
 // });
+  // Vampires.collection.insertMany(vampArray, (err, vampires)=>{
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     console.log(vampires);
+  //   }
+  // });
+
 
 // ### Add some new vampire data
 // Vampires.create({name: 'Jimmy'}, (err, vampire)=>{
@@ -48,8 +54,58 @@ mongoose.connection.on('error', (err)=>{
 // });
 /////////////////////////////////////////////////
 // ## QUERYING
+// Vampires.find({},(err, vampires)=>{
+// if(err)
+// {
+//  console.log(err);
+// }
+// else{
+//   console.log(vampires);
+// }
+//
+// });
 /////////////////////////////////////////////////
 // ### Select by comparison
+// Find all the vampires that that are females
+// Vampires.find({gender: 'f'}, (err, vampires)=>{
+//   if (err){
+//     console.log(err);
+//   } else {
+//     console.log(vampires);
+//   }
+// })
+// have greater than 500 victims
+// Vampires.find({},{name:1,victims:1,_id:0}, (err, vampires)=>{
+//   if(err){
+//     console.log(err)
+//   } else{
+//     console.log(vampires)
+//   }
+// }).where('victims').gt(500);
+// have fewer than or equal to 150 victims
+// Vampires.find({},{name:1,victims:1,_id:0}, (err, vampires)=>{
+//   if(err){
+//     console.log(err)
+//   } else {
+//     console.log(vampires)
+//   }
+// }).where('victims').lte(150);
+// have a victim count is not equal to 210234
+// Vampires.find({},{name:1,victims:1,_id:0}, (err, vampires)=>{
+//   if(err){
+//     console.log(err)
+//   } else {
+//     console.log(vampires)
+//   }
+// }).where('victims').ne(210234);
+// have greater than 150 AND fewer than 500 victims
+// Vampires.find({},{name:1,victims:1,_id:0}, (err, vampires)=>{
+//   if(err){
+//     console.log(err)
+//   } else{
+//     console.log(vampires)
+//   }
+// }).where('victims').gt(150).lt(500);
 // Vampires.find({},{name:1, victims:1,_id:0}, (err, vampire)=>{
 //   if(err){
 //     console.log(err);
@@ -59,13 +115,46 @@ mongoose.connection.on('error', (err)=>{
 // }).where('victims').gt(2);
 /////////////////////////////////////////////////
 // ### Select by exists or does not exist
-let query = Vampires.exists({gender: 'f'}, (err, vampires)=>{
-  if (err){
-    console.log(err);
-  } else {
-    console.log(vampires);
-  }
-})
+// have a title property
+// Vampires.find({ title : {$exists : true} }, (err, vampires)=>{
+//   if(err) {
+//     console.log(err);
+//   } else {
+//     console.log(vampires);
+//   }
+//    mongoose.connection.close();
+// });
+// do not have a victims property
+// Vampires.find({victims:{$exists:false}}, (err, vampires)=>{
+//   if(err){
+//     console.log(err);
+//   } else {
+//     console.log(vampires);
+//   }
+// });
+// have a title AND no victims
+// Vampires.find({title:{$exists:true}, victims:{$exists:false}}, (err, vampires)=>{
+//   if(err){
+//     console.log(err);
+//   } else{
+//     console.log(vampires);
+//   }
+// })
+// have victims AND the victims they have are greater than 1000
+// Vampires.find({victims:{$exists:true}}, (err, vampires)=>{
+//   if (err){
+//     console.log(err);
+//   } else {
+//     console.log(vampires)
+//   }
+// }).where('victims').gt(1000);
+// let query = Vampires.exists({gender: 'f'}, (err, vampires)=>{
+//   if (err){
+//     console.log(err);
+//   } else {
+//     console.log(vampires);
+//   }
+// })
 /////////////////////////////////////////////////
 // ### Select with OR
 
