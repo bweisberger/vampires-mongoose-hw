@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 // 2. Require your model (and possibly your extra data source);
 const Vampires = require('./models/vampire');
-const vampArray = require('.populateVampires.js');
+const vampArray = require('./populateVampires.js');
 // 3. Connect your database and collection name
 connectionString = 'mongodb://localhost/vampires';
 mongoose.connect(connectionString, {userNewUrlParser: true});
@@ -27,26 +27,45 @@ mongoose.connection.on('error', (err)=>{
 /////////////////////////////////////////////////
 // INSERT USING MONGOOSE
 // ### Add the vampire data that we gave you
-vampArray.forEach(function(vampire, index){
-  Vampire.create(vampire, (err, vampire){
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(vampire);
-    }
-  })
-})
+// vampArray.forEach(function(vampire, index){
+//
+//   Vampires.create(vampire, (err, vampire)=>{
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(vampire);
+//     }
+//   })
+// });
 
 // ### Add some new vampire data
-
+// Vampires.create({name: 'Jimmy'}, (err, vampire)=>{
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     console.log(vampire);
+//   }
+// });
 /////////////////////////////////////////////////
 // ## QUERYING
 /////////////////////////////////////////////////
 // ### Select by comparison
-
+// Vampires.find({},{name:1, victims:1,_id:0}, (err, vampire)=>{
+//   if(err){
+//     console.log(err);
+//   } else {
+//     console.log(vampire)
+//   }
+// }).where('victims').gt(2);
 /////////////////////////////////////////////////
 // ### Select by exists or does not exist
-
+let query = Vampires.exists({gender: 'f'}, (err, vampires)=>{
+  if (err){
+    console.log(err);
+  } else {
+    console.log(vampires);
+  }
+})
 /////////////////////////////////////////////////
 // ### Select with OR
 
