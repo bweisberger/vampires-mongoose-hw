@@ -157,7 +157,38 @@ mongoose.connection.on('error', (err)=>{
 // })
 /////////////////////////////////////////////////
 // ### Select with OR
-
+// are from New York, New York, US or New Orleans, Louisiana, US
+// Vampires.find({$or:[{location:'New York, New York, US'}, {location:'New Orleans, Louisiana, US'}]}, (err, vampires)=>{
+//   if(err){
+//     console.log(err);
+//   } else {
+//     console.log(vampires);
+//   }
+// });
+// love brooding or being tragic
+// Vampires.find({$or:[{loves:'brooding'}, {loves:'being tragic'}]}, (err, vampires)=>{
+//   if(err){
+//     console.log(err);
+//   } else{
+//     console.log(vampires);
+//   }
+// })
+// have more than 1000 victims or love marshmallows
+// Vampires.find({$or:[{victims:{$gt:1000}}, {loves:'marshmallows'}]}, (err, vampires)=>{
+//   if(err){
+//     console.log(err);
+//   } else {
+//     console.log(vampires);
+//   }
+// })
+// have red hair or green eyes
+Vampires.find({$or:[{hair_color:'red'}, {eye_color:'green'}]}, (err, vampires)=>{
+  if(err){
+    console.log(err);
+  } else {
+    console.log(vampires);
+  }
+})
 /////////////////////////////////////////////////
 //### Select objects that match one of several values
 
